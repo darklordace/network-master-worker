@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
 
 import asyncio
+import os
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 WORKER_LIST = [
     {
-        "host": "127.0.0.1",
+        "host": os.getenv("WORKER_1_HOST", "127.0.0.1"),
         "port": 65430,
         "conn": 0
     },
     {
-        "host": "127.0.0.1",
+        "host": os.getenv("WORKER_2_HOST", "127.0.0.1"),
         "port": 65425,
         "conn": 0
     },
     {
-        "host": "127.0.0.1",
+        "host": os.getenv("WORKER_3_HOST", "127.0.0.1"),
         "port": 65420,
         "conn": 0
     }

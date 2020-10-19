@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
 import asyncio
+import os
 
-HOST = "127.0.0.1"              # Standard loopback interface address (localhost)
-PORT = int(input("PORT: "))     # Port to listen on (non-privileged ports are > 1023)
+HOST = "127.0.0.1"                              # Standard loopback interface address (localhost)
+PORT = os.getenv("WORKER_PORT")                 # Port to listen on (non-privileged ports are > 1023)
+
+if not PORT:
+    PORT = int(input("PORT: "))
 
 # Algorithm to compute Subset Sum Solutions using Brute Force
 def cari_jawaban(data_list, pos, sum, ans):

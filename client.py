@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 import asyncio
+import os
 import random
 
-HOST = "127.0.0.1"  # The server's hostname or IP address
-PORT = 65432        # The port used by the server
+HOST = os.getenv("MASTER_HOST", "127.0.0.1")  # The server's hostname or IP address
+PORT = 65432                                  # The port used by the server
 
 def generate_long_list():
     res = []
