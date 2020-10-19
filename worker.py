@@ -5,7 +5,7 @@ import asyncio
 HOST = "127.0.0.1"              # Standard loopback interface address (localhost)
 PORT = int(input("PORT: "))     # Port to listen on (non-privileged ports are > 1023)
 
-# NP-Complete Problem, very slow algorithm
+# Algorithm to compute Subset Sum Solutions using Brute Force
 def cari_jawaban(data_list, pos, sum, ans):
     if pos == len(data_list):
         return 1 if (sum == 0 and len(ans) > 0) else 0
