@@ -7,8 +7,8 @@ HOST = "127.0.0.1"                                # Standard loopback interface 
 PORT = -1                                       # Port to listen on (non-privileged ports are > 1023)
 
 if len(sys.argv) >= 3:
-    HOST = argv[1]
-    PORT = int(argv[2])
+    HOST = sys.argv[1]
+    PORT = int(sys.argv[2])
 
 if PORT == -1:
     PORT = int(input("PORT: "))

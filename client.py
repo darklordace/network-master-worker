@@ -8,7 +8,7 @@ HOST = "127.0.0.1"                            # The server's hostname or IP addr
 PORT = 65432                                  # The port used by the server
 
 if len(sys.argv) >= 2:
-    HOST = argv[1]
+    HOST = sys.argv[1]
 
 def generate_long_list():
     res = []

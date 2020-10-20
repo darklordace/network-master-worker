@@ -8,7 +8,7 @@ HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 if len(sys.argv) >= 2:
-    HOST = argv[1]
+    HOST = sys.argv[1]
 
 WORKER_LIST = [
     {
