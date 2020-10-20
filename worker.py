@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
 import asyncio
-import os
+import sys
 
-HOST = "127.0.0.1"                              # Standard loopback interface address (localhost)
-PORT = os.getenv("WORKER_PORT")                 # Port to listen on (non-privileged ports are > 1023)
+HOST = "127.0.0.1"                                # Standard loopback interface address (localhost)
+PORT = -1                                       # Port to listen on (non-privileged ports are > 1023)
 
-if not PORT:
+if len(sys.argv >= 3):
+    HOST = argv[1]
+    PORT = int(argv[2])
+
+if PORT == -1:
     PORT = int(input("PORT: "))
 
 # Algorithm to compute Subset Sum Solutions using Brute Force
