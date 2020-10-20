@@ -7,7 +7,7 @@ import random
 HOST = "127.0.0.1"                            # The server's hostname or IP address
 PORT = 65432                                  # The port used by the server
 
-if len(sys.argv >= 2):
+if len(sys.argv) >= 2:
     HOST = argv[1]
 
 def generate_long_list():

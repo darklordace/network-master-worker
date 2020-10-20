@@ -6,7 +6,7 @@ import sys
 HOST = "127.0.0.1"                                # Standard loopback interface address (localhost)
 PORT = -1                                       # Port to listen on (non-privileged ports are > 1023)
 
-if len(sys.argv >= 3):
+if len(sys.argv) >= 3:
     HOST = argv[1]
     PORT = int(argv[2])
 
