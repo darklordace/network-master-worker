@@ -67,7 +67,7 @@ async def master_server(reader, writer):
         if queue[0] == data:
             chosen_data = queue.popleft()
             break
-        await asyncio.sleep(1) # check connection every 1 second
+        await asyncio.sleep(1) # check queue every 1 second
 
     print(WORKER_LIST)
 
