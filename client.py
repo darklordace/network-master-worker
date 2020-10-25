@@ -7,8 +7,16 @@ import random
 HOST = "127.0.0.1"                            # The server's hostname or IP address
 PORT = 65432                                  # The port used by the server
 
-long_list_length = int(input("Elements to send: "))
-long_list_length = min(long_list_length, 25)  # Limit long list length to 25
+print("Welcome to client.py")
+print("---")
+print("Some notes:")
+print("1 - 20 elements = Fast")
+print("21 - 25 elements = Moderate")
+print("26 - 30 elements = Slow")
+print("> 30 elements = Very Slow")
+print("---")
+long_list_length = int(input("Elements to send (1 - 30): "))
+long_list_length = min(long_list_length, 30)  # Limit long list length to 30
 
 if len(sys.argv) >= 2:
     HOST = sys.argv[1]
@@ -23,6 +31,7 @@ async def contact_master(message, host, port, id):
     message = str(message)
     reader, writer = await asyncio.open_connection(host, port)
 
+    print("---")
     print(f'({id}) Send: {message!r}')
     writer.write(message.encode())
     await writer.drain() # Flow control
