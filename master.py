@@ -3,6 +3,7 @@
 import asyncio
 import os
 import sys
+from collections import deque
 
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -49,6 +50,9 @@ async def contact_worker(message, host, port):
     return data
 
 async def master_server(reader, writer):
+
+    queue = deque()
+
     data = ""
     while True:
         MAX_BYTES = 1024
@@ -57,6 +61,14 @@ async def master_server(reader, writer):
         if len(chunk) < MAX_BYTES:
             break
     
+    queue.append(data)
+    
+    while True:
+        if queue[0] == data:
+            chosen_data = queue.popleft()
+            break
+        await asyncio.sleep(1) # check queue every 1 second
+
     print(WORKER_LIST)
 
     chosen_worker = None
@@ -69,12 +81,12 @@ async def master_server(reader, writer):
         if chosen_worker:
             break
         await asyncio.sleep(10) # check connection every 10 seconds
-    
+        
     port_chosen = chosen_worker["port"]
     mes = "Job handled at %s" % port_chosen
     print(mes)
 
-    processed_data = await contact_worker(data, chosen_worker["host"], chosen_worker["port"])
+    processed_data = await contact_worker(chosen_data, chosen_worker["host"], chosen_worker["port"])
     chosen_worker["conn"] -= 1
 
     notice = "Your job is done by port %s and the result is %s" % (port_chosen, processed_data)
