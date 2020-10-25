@@ -81,11 +81,16 @@ async def master_server(reader, writer):
         if chosen_worker:
             break
         await asyncio.sleep(10) # check connection every 10 seconds
-    
+        
+    port_chosen = chosen_worker["port"]
+    mes = "Job handled at %s" % port_chosen
+    print(mes)
+
     processed_data = await contact_worker(chosen_data, chosen_worker["host"], chosen_worker["port"])
     chosen_worker["conn"] -= 1
 
-    writer.write(processed_data.encode())
+    notice = "Your job is done by port %s and the result is %s" % (port_chosen, processed_data)
+    writer.write(notice.encode())
     await writer.drain()  # Flow control
     writer.close()
     await writer.wait_closed()
